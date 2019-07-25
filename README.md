@@ -1,6 +1,6 @@
 # Simple TMDB app
 
- App in **MVVM** with _Android architecture componentes_
+ App in **MVVM** with _Android architecture components_
 
 👉🏻 Libraries used
 ### **_Dagger2_** - for Dependency Injection 💉
