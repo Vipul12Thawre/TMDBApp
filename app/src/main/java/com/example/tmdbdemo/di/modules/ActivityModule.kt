@@ -4,6 +4,7 @@ import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.example.tmdbdemo.data.repository.TMDBRepository
+import com.example.tmdbdemo.ui.base.BaseActivity
 import com.example.tmdbdemo.ui.dashboard.DashBoardViewModel
 import com.example.tmdbdemo.ui.search.SearchViewModel
 import com.example.tmdbdemo.utils.ViewModelProviderFactory
@@ -12,7 +13,7 @@ import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
 
 @Module
-class ActivityModule(val activity: AppCompatActivity) {
+class ActivityModule(private val activity: BaseActivity<*>) {
 
 
     @Provides

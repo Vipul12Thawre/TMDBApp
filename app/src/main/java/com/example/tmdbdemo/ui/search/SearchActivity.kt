@@ -13,7 +13,7 @@ import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_search.*
 import javax.inject.Inject
 
-class SearchActivity : BaseActivity() {
+class SearchActivity : BaseActivity<SearchViewModel>() {
 
     @Inject
     lateinit var searchViewModel: SearchViewModel
@@ -25,12 +25,12 @@ class SearchActivity : BaseActivity() {
         component.injectActivity(this)
     }
 
-    override fun onCreate() {
-        searchViewModel.fetchTmdbSearch(edtSearch.getObservableString())
-    }
 
     override fun setupObservers() {
-        searchViewModel.getSearchedLiveData().observe(this, Observer {
+
+        searchViewModel.fetchTmdbSearch(edtSearch.getObservableString())
+
+        viewModel.getSearchedLiveData().observe(this, Observer {
             searchList.clear()
             searchList.addAll(it)
             searchMovieAdapter.notifyDataSetChanged()
@@ -49,7 +49,6 @@ class SearchActivity : BaseActivity() {
 
 
     private fun SearchView.getObservableString(): Observable<String> {
-
         val pubSub = PublishSubject.create<String>()
 
         setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -62,7 +61,6 @@ class SearchActivity : BaseActivity() {
                 pubSub.onComplete()
                 return true
             }
-
         })
         return pubSub
     }

@@ -8,15 +8,20 @@ import com.example.tmdbdemo.data.NetworkService
 import com.example.tmdbdemo.data.Networking
 import com.example.tmdbdemo.data.models.response.ResultsItem
 import com.example.tmdbdemo.data.repository.TMDBRepository
+import com.example.tmdbdemo.ui.base.BaseViewModel
 import com.example.tmdbdemo.utils.common.Resource
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class DashBoardViewModel @Inject constructor(
-    private val compositeDisposable: CompositeDisposable,
+class DashBoardViewModel(
+    compositeDisposable: CompositeDisposable,
     private val tmdbRepository: TMDBRepository
-) : ViewModel() {
+) : BaseViewModel(compositeDisposable) {
+
+    override fun onCreate() {
+        fetchTrendingData()
+    }
 
     val liveData = MutableLiveData<Resource<List<ResultsItem>>>()
 
